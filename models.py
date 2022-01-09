@@ -17,7 +17,7 @@ class Orders(BaseModel):
     unpaid: int
     unsent: int
     refunds: int
-    remaining: int
+    pending: int
 
 class Offer(BaseModel):
     id: int

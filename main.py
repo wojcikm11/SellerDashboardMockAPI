@@ -31,16 +31,24 @@ opinions: List[Opinion] = [
     Opinion(id=10, rating=3, description="Jest ok", date=datetime(2019, 5, 12, hour=21, minute=22, second=37)),
     Opinion(id=11, rating=2, description="Nie jest ok", date=datetime(2017, 5, 12, hour=21, minute=22, second=37))
 ]
+noOpinions: List[Opinion] = []
 
-orders: Orders = Orders(unpaid=1, unsent=2, refunds=3, remaining=4)
-
+orders: Orders = Orders(unpaid=1, unsent=2, refunds=3, pending=4)
+noOrders: Orders = Orders(unpaid=0, unsent=0, refunds=0, pending=0)
 
 
 @app.get("/opinions")
 async def root():
     return opinions
+
+@app.get("/no_opinions")
+async def root():
+    return noOpinions
     
 @app.get("/orders")
 async def root():
     return orders
     
+@app.get("/no_orders")
+async def root():
+    return noOrders
