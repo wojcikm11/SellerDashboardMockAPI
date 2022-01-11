@@ -32,4 +32,6 @@ class SalesQuality(BaseModel):
     rating: int
     aspect: List[str]
 
-
+class DailyTip(BaseModel):
+    id: int
+    tip : str

@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models import Offer, Opinion, Orders
+from models import Offer, Opinion, Orders, DailyTip
 import base64
 
 
@@ -52,6 +52,17 @@ offers: List[Offer] = [
     Offer(id=3, photoBytes=convertImgToString("kaczka.jpg"), name="Sushi z tego dobrego miejsca gdzie są zniżki", sold=101, turnover=103, views=13),
     Offer(id=4, photoBytes=convertImgToString("kaczka.jpg"), name="Chińczyk", sold=6, turnover=12, views=399)
 ]
+
+tipsEng : List[DailyTip] =[
+    DailyTip(id=0,tip="Avoid selling low quality items."),
+    DailyTip(id=1,tip="Send orders on time. Buyers will surely appreciate your dedication and discipline."),
+    DailyTip(id=2,tip="Offer a Fair Return Policy. Buyers  look for sellers who offer a return policy as this builds trust.")
+
+]
+
+@app.get("/tips/eng")
+async def root():
+    return tipsEng
 
 
 @app.get("/opinions")
