@@ -2,7 +2,16 @@ from datetime import datetime
 from typing import List
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models import Opinion, Orders
+from models import Offer, Opinion, Orders
+import base64
+
+
+def convertImgToString(img_path):
+    with open(img_path, "rb") as imageFile:
+        if (img_path.endswith(".jpg")):
+            return 'data:image/jpg;base64,' + str(base64.b64encode(imageFile.read()).decode())
+        elif (img_path.endswith(".png")):
+            return 'data:image/png;base64,' + str(base64.b64encode(imageFile.read()).decode())
 
 app = FastAPI()
 
@@ -36,6 +45,14 @@ noOpinions: List[Opinion] = []
 orders: Orders = Orders(unpaid=1, unsent=2, refunds=3, pending=4)
 noOrders: Orders = Orders(unpaid=0, unsent=0, refunds=0, pending=0)
 
+offers: List[Offer] = [
+    Offer(id=0, photoBytes=convertImgToString("chiken.png"), name="Kurczak w sosie własnym", sold=24, turnover=59, views=103),
+    Offer(id=1, photoBytes=convertImgToString("chiken.png"), name="Pizza 4 sery - tylko u nas PROMOCJA", sold=32, turnover=21, views=224),
+    Offer(id=2, photoBytes=convertImgToString("chiken.png"), name="Spaghetti prosto z Włoch", sold=100, turnover=2, views=42),
+    Offer(id=3, photoBytes=convertImgToString("kaczka.jpg"), name="Sushi z tego dobrego miejsca gdzie są zniżki", sold=101, turnover=103, views=13),
+    Offer(id=4, photoBytes=convertImgToString("kaczka.jpg"), name="Chińczyk", sold=6, turnover=12, views=399)
+]
+
 
 @app.get("/opinions")
 async def root():
@@ -52,3 +69,7 @@ async def root():
 @app.get("/no_orders")
 async def root():
     return noOrders
+
+@app.get("/offers")
+async def root():
+    return offers

@@ -21,14 +21,11 @@ class Orders(BaseModel):
 
 class Offer(BaseModel):
     id: int
-    photo: FileResponse
-    description: str
+    name: str
+    photoBytes: str
     sold: int
     turnover: int
     views: int
-
-    class Config:
-        arbitrary_types_allowed = True
 
 class SalesQuality(BaseModel):
     category: str
