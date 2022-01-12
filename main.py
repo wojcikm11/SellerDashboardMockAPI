@@ -60,10 +60,20 @@ tipsEng : List[DailyTip] =[
 
 ]
 
+tipsPl : List[DailyTip] =[
+    DailyTip(id=0,tip="Unikaj sprzedaży produktów o niskiej jakości."),
+    DailyTip(id=1,tip="Wysyłaj zamówienia na czas. Kupujący z pewnością docenią Twoje zaangażowanie i dyscyplinę."),
+    DailyTip(id=2,tip="Zaoferuj uczciwą politykę zwrotów. Kupujący szukają sprzedawców, którzy oferują zwroty, ponieważ buduje to zaufanie miedzy stronami.")
+
+]
+
 @app.get("/tips/eng")
-async def root():
+def root():
     return tipsEng
 
+@app.get("/tips/pl")
+async def root():
+    return tipsPl
 
 @app.get("/opinions")
 async def root():

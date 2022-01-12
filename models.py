@@ -35,3 +35,7 @@ class SalesQuality(BaseModel):
 class DailyTip(BaseModel):
     id: int
     tip : str
+
+class ChartData(BaseModel):
+    id :int
+    user_id : int
