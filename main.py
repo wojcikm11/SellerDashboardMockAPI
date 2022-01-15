@@ -153,14 +153,14 @@ def getRevenueById(id :int) -> list[Revenue]:
 
 
 def getChartDataCurrentDay(l : List, today :DateTime) -> List:
-    h =  [0 for i in range(ceil((today-datetime(today.year,today.month,today.day,0,0,0)).seconds/3600))]
+    h =  [0 for i in range(24)]
     for i in l :
         if (i.date.year==today.year) & (i.date.month==today.month) & (i.date.day==today.day) :
             h[floor(i.date.hour)] +=i.n
     return h
 
 def getChartDataCurrentYear(l : List, today :DateTime):
-    months =  [0 for i in range(today.month)]
+    months =  [0 for i in range(12)]
     first_day = datetime(today.year,1,1)
     for i in l:
         if (i.date>=first_day) & (i.date<=today):
@@ -170,14 +170,9 @@ def getChartDataCurrentYear(l : List, today :DateTime):
 
 def getChartDataCurrentWeek(l : List, today :DateTime) -> List:
     monday = today - timedelta(days = today.weekday())
-    if (today-monday).days == 0:
-         days =  [0 for i in range(1)]
-    else:
-         days =  [0 for i in range((today-monday).days+1)]
-    print(len(days))
+    days =  [0 for i in range(7)]
     for i in l:
         if (i.date >= monday) & (i.date <=today):
-            print(i.date.weekday())
             days[i.date.weekday()] += i.n
     return days
 
