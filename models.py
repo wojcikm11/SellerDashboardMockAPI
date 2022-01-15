@@ -36,6 +36,14 @@ class DailyTip(BaseModel):
     id: int
     tip : str
 
-class ChartData(BaseModel):
+class Revenue(BaseModel):
     id :int
     user_id : int
+    date :datetime
+    n : float
+
+class Turnover(BaseModel):
+    id :int
+    user_id : int
+    date :datetime
+    n : int

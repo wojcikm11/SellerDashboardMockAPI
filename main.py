@@ -1,9 +1,13 @@
 from datetime import datetime
+from math import ceil, floor
 from typing import List
+from xmlrpc.client import DateTime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models import Offer, Opinion, Orders, DailyTip
+from models import Offer, Opinion, Orders, DailyTip,Revenue,Turnover
 import base64
+from datetime import *
+from calendar import monthrange
 
 
 def convertImgToString(img_path):
@@ -69,6 +73,168 @@ tipsPl : List[DailyTip] =[
     DailyTip(id=2,tip="Zaoferuj uczciwą politykę zwrotów. Kupujący szukają sprzedawców, którzy oferują zwroty, ponieważ buduje to zaufanie miedzy stronami.")
 
 ]
+
+revenue : List[Revenue]=[
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 17,0,0),n=10000000),
+    Revenue(id=0,user_id=0,date=datetime(2021, 2, 1,0,0),n=5555),
+    Revenue(id=0,user_id=0,date=datetime(2021, 3, 1,0,0),n=4392),
+    Revenue(id=0,user_id=0,date=datetime(2021, 4, 1,0,0),n=7431),
+    Revenue(id=0,user_id=0,date=datetime(2021, 5, 1,0,0),n=6666),
+    Revenue(id=0,user_id=0,date=datetime(2021, 6, 1,0,0),n=4500),
+    Revenue(id=0,user_id=0,date=datetime(2021, 7, 1,0,0),n=12453),
+    Revenue(id=0,user_id=0,date=datetime(2021, 8, 12,0,0),n=500),
+    Revenue(id=0,user_id=0,date=datetime(2021, 8, 1,0,0),n=3000),
+    Revenue(id=0,user_id=0,date=datetime(2021, 9, 1,0,0),n=1245),
+    Revenue(id=0,user_id=0,date=datetime(2021, 10, 1,0,0),n=8500),
+    Revenue(id=0,user_id=0,date=datetime(2021, 11, 1,0,0),n=5000),
+    Revenue(id=0,user_id=0,date=datetime(2021, 12, 1,0,0),n=12453),
+    Revenue(id=0,user_id=0,date=datetime(2022, 12, 1,0,0),n=147),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 1,0,0),n=147),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 2,0,0),n=234),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 3,0,0),n=578),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 4,0,0),n=90.56),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 4,0,0),n=1000000),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 5,0,0),n=123),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 6,0,17),n=367),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 7,23,4),n=286),
+    Revenue(id=0,user_id=0,date=datetime(2022, 1, 7,0,17),n=286),
+    Revenue(id=0,user_id=1,date=datetime(2022, 1, 7,0,17),n=286)
+]
+
+turnover : List[Turnover]=[
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 17,0,0),n=10000000),
+    Turnover(id=0,user_id=0,date=datetime(2021, 2, 1,0,0),n=5555),
+    Turnover(id=0,user_id=0,date=datetime(2021, 3, 1,0,0),n=4392),
+    Turnover(id=0,user_id=0,date=datetime(2021, 4, 1,0,0),n=7431),
+    Turnover(id=0,user_id=0,date=datetime(2021, 5, 1,0,0),n=6666),
+    Turnover(id=0,user_id=0,date=datetime(2021, 6, 1,0,0),n=4500),
+    Turnover(id=0,user_id=0,date=datetime(2021, 7, 1,0,0),n=12453),
+    Turnover(id=0,user_id=0,date=datetime(2021, 8, 12,0,0),n=500),
+    Turnover(id=0,user_id=0,date=datetime(2021, 8, 1,0,0),n=3000),
+    Turnover(id=0,user_id=0,date=datetime(2021, 9, 1,0,0),n=1245),
+    Turnover(id=0,user_id=0,date=datetime(2021, 10, 1,0,0),n=8500),
+    Turnover(id=0,user_id=0,date=datetime(2021, 11, 1,0,0),n=5000),
+    Turnover(id=0,user_id=0,date=datetime(2021, 12, 1,0,0),n=12453),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 1,0,0),n=147),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 2,0,0),n=234),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 3,0,0),n=578),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 4,0,0),n=90),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 4,0,0),n=1000000),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 5,0,0),n=123),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 6,0,0),n=367),
+    Turnover(id=0,user_id=0,date=datetime(2022, 1, 7,0,0),n=286),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 7,0,0),n=286)
+]
+
+
+@app.get("/chart/revenue/{id}")
+def root(id :int):
+    a = list()
+    for i in revenue:
+        if i.user_id == id:
+            a.append(i)
+    return a
+
+@app.get("/tips/eng")
+def root():
+    return tipsEng
+
+@app.get("/tips/pl")
+async def root():
+    return tipsPl
+
+
+def getRevenueById(id :int) -> list[Revenue]:
+    a = list()
+    for i in revenue:
+        if i.user_id == id:
+            a.append(i)
+    return a
+
+
+def getChartDataCurrentDay(l : List, today :DateTime) -> List:
+    h =  [0 for i in range(ceil((today-datetime(today.year,today.month,today.day,0,0,0)).seconds/3600))]
+    for i in l :
+        if (i.date.year==today.year) & (i.date.month==today.month) & (i.date.day==today.day) :
+            h[floor(i.date.hour)] +=i.n
+    return h
+
+def getChartDataCurrentYear(l : List, today :DateTime):
+    months =  [0 for i in range(today.month)]
+    first_day = datetime(today.year,1,1)
+    for i in l:
+        if (i.date>=first_day) & (i.date<=today):
+            months[i.date.month-1] += i.n
+
+    return months
+
+def getChartDataCurrentWeek(l : List, today :DateTime) -> List:
+    monday = today - timedelta(days = today.weekday())
+    if (today-monday).days == 0:
+         days =  [0 for i in range(1)]
+    else:
+         days =  [0 for i in range((today-monday).days+1)]
+    print(len(days))
+    for i in l:
+        if (i.date >= monday) & (i.date <=today):
+            print(i.date.weekday())
+            days[i.date.weekday()] += i.n
+    return days
+
+
+
+def getRevenueById(id :int):
+    a = list()
+    for i in revenue:
+        if i.user_id == id:
+            a.append(i)
+    return a
+
+
+@app.get("/chart/revenue/year/")
+def root(id :int, date :datetime):
+    revenue = getRevenueById(id)
+    revenue = getChartDataCurrentYear(revenue,date)
+    return revenue
+
+@app.get("/chart/turnover/year/")
+def root(id :int, date :datetime):
+    revenue = getRevenueById(id)
+    revenue = getChartDataCurrentYear(turnover,date)
+    return revenue
+
+@app.get("/chart/revenue/week/")
+def root(id :int, date :datetime):
+    turnover = getRevenueById(id)
+    turnover = getChartDataCurrentWeek(revenue,date)
+    return turnover
+
+@app.get("/chart/turnover/week/")
+def root(id :int, date :datetime):
+    turnover = getRevenueById(id)
+    turnover = getChartDataCurrentWeek(turnover,date)
+    return turnover
+
+
+@app.get("/chart/revenue/day/")
+def root(id :int, date :datetime):
+    revenue = getRevenueById(id)
+    revenue = getChartDataCurrentDay(revenue,date)
+    return revenue
+
+@app.get("/chart/turnover/day/")
+def root(id :int, date :datetime):
+    turnover = getRevenueById(id)
+    turnover = getChartDataCurrentDay(turnover,date)
+    return turnover
+
+@app.get("/chart/revenue/{id}")
+def root(id :int):
+    a = list()
+    for i in revenue:
+        if i.user_id == id:
+            a.append(i)
+    return a
 
 @app.get("/tips/eng")
 def root():
