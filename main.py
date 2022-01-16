@@ -157,6 +157,7 @@ def getChartDataCurrentDay(l : List, today :DateTime) -> List:
     for i in l :
         if (i.date.year==today.year) & (i.date.month==today.month) & (i.date.day==today.day) :
             h[floor(i.date.hour)] +=i.n
+        hours = {i : h[i] for i in range(24)}
     return h
 
 def getChartDataCurrentYear(l : List, today :DateTime):
@@ -165,8 +166,8 @@ def getChartDataCurrentYear(l : List, today :DateTime):
     for i in l:
         if (i.date>=first_day) & (i.date<=today):
             months[i.date.month-1] += i.n
-
-    return months
+    m = {i+1 : months[i] for i in range(12)}
+    return m
 
 def getChartDataCurrentWeek(l : List, today :DateTime) -> List:
     monday = today - timedelta(days = today.weekday())
@@ -174,7 +175,8 @@ def getChartDataCurrentWeek(l : List, today :DateTime) -> List:
     for i in l:
         if (i.date >= monday) & (i.date <=today):
             days[i.date.weekday()] += i.n
-    return days
+    d = {i+1 : days[i] for i in range(7)}
+    return d
 
 
 
