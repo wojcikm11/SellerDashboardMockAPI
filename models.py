@@ -3,17 +3,26 @@ from pydantic import BaseModel
 from datetime import datetime
 from fastapi.responses import FileResponse
 
+
+class User(BaseModel):
+    id: int
+    username: str
+    password: str
+
 class Opinion(BaseModel):
     id: int
+    user_id: int
     rating: int
     date: datetime
     description: Optional[str]
 
 class SalesTip(BaseModel):
     id: int
+    user_id: int
     description: str
 
 class Orders(BaseModel):
+    user_id: int
     unpaid: int
     unsent: int
     refunds: int
@@ -21,6 +30,7 @@ class Orders(BaseModel):
 
 class Offer(BaseModel):
     id: int
+    user_id: int
     name: str
     photoBytes: str
     sold: int
@@ -28,12 +38,14 @@ class Offer(BaseModel):
     views: int
 
 class SalesQuality(BaseModel):
+    user_id: int
     category: str
     rating: int
     aspect: List[str]
 
 class DailyTip(BaseModel):
     id: int
+    user_id: int
     tip : str
 
 class Revenue(BaseModel):
