@@ -162,7 +162,7 @@ def getChartDataCurrentDay(l : List, today :DateTime) -> List:
     for i in l :
         if (i.date.year==today.year) & (i.date.month==today.month) & (i.date.day==today.day) :
             h[floor(i.date.hour)] +=i.n
-        hours = {i : h[i] for i in range(24)}
+    hours = {i : h[i] for i in range(24)}
     return h
 
 def getChartDataCurrentYear(l : List, today :DateTime):
