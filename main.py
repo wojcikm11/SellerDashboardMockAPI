@@ -59,7 +59,8 @@ offers: List[Offer] = [
     Offer(id=1, user_id=0, photoBytes=convertImgToString("chiken.png"), name="Pizza 4 sery - tylko u nas PROMOCJA", sold=32, turnover=21, views=224),
     Offer(id=2, user_id=0, photoBytes=convertImgToString("phone.jpg"), name="Spaghetti prosto z Włoch", sold=100, turnover=2, views=42),
     Offer(id=3, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="Sushi z tego dobrego miejsca gdzie są zniżki", sold=101, turnover=103, views=13),
-    Offer(id=4, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="Chińczyk", sold=6, turnover=12, views=399)
+    Offer(id=4, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="Chińczyk", sold=6, turnover=12, views=399),
+    Offer(id=5, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="LOLOLOLO", sold=2, turnover=6, views=100)
 ]
 
 noOffers: List[Offer] = []
