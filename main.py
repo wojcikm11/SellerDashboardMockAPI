@@ -4,7 +4,7 @@ from typing import List
 from xmlrpc.client import DateTime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models import Offer, Opinion, Orders, DailyTip,Revenue,Turnover
+from models import Offer, Opinion, Orders, DailyTip,Revenue,Turnover, User
 import base64
 from datetime import *
 from calendar import monthrange
@@ -77,6 +77,12 @@ tipsPl : List[DailyTip] =[
     DailyTip(id=1, user_id=0, tip="Wysyłaj zamówienia na czas. Kupujący z pewnością docenią Twoje zaangażowanie i dyscyplinę."),
     DailyTip(id=2, user_id=0, tip="Zaoferuj uczciwą politykę zwrotów. Kupujący szukają sprzedawców, którzy oferują zwroty, ponieważ buduje to zaufanie miedzy stronami.")
 
+]
+
+users : List[User] =[
+    User(id=0, username="ms@platform", password="1234", name="Megan Three Stalion"),
+    User(id=0, username="mg@platform", password="2345", name="Magda Gesler"),
+    User(id=0, username="hp@platform", password="3456", name="Harry Potter")
 ]
 
 revenue : List[Revenue]=[
@@ -294,3 +300,7 @@ async def root(id: int):
         if i.user_id == id:
             no_offers_filtered.append(i)
     return no_offers_filtered
+    
+@app.get("/user")
+async def root():
+    return users

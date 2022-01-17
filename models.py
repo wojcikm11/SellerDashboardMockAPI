@@ -8,6 +8,7 @@ class User(BaseModel):
     id: int
     username: str
     password: str
+    name: str
 
 class Opinion(BaseModel):
     id: int
