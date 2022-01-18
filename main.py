@@ -42,7 +42,21 @@ opinions: List[Opinion] = [
     Opinion(id=8, user_id=0, rating=1, description="Cóż napisać ... jestem bardzo niezadowolony. Szukałem w sieci różnych rozwiązań i trafiłem przez przypadek na tego sprzedawcę. Po zapoznaniu się z możliwościami sklepu dokonałem zakupu - cena niewielka - w sumie dużo nie ryzykowałem - brak umów więc w razie czego tylko utopione kilka złotych. Jednak się nie zawiodłem. Zarówno możliwości sklepu jak i jego obsługa posprzedaży są na najwyższym poziomie. Właśnie kupuję kolejny towar i jak najbardziej mogę wszystkim polecić. Bardzo dobra cena w stosunku do jakości.", date=datetime(2023, 5, 12, hour=21, minute=22, second=37)),
     Opinion(id=9, user_id=0, rating=1, description="O ile obsługa w sklepie jest ok, o tyle dział rat w arogancki i w ogóle nie wykazujący zainteresowania klientem, obsługa \"z musu\", suma sumarum zrezygnowałem z zakupu produktu, który miałem na oku. A wielka szkoda, bo długo przymierzałem się...", date=datetime(2018, 5, 12, hour=21, minute=22, second=37)),
     Opinion(id=10, user_id=0, rating=3, description="Jest ok", date=datetime(2019, 5, 12, hour=21, minute=22, second=37)),
-    Opinion(id=11, user_id=0, rating=2, description="Nie jest ok", date=datetime(2017, 5, 12, hour=21, minute=22, second=37))
+    Opinion(id=11, user_id=0, rating=2, description="Nie jest ok", date=datetime(2017, 5, 12, hour=21, minute=22, second=37)),
+
+    Opinion(id=12, user_id=1, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=13, user_id=1, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=14, user_id=1, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=15, user_id=1, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=16, user_id=1, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=17, user_id=1, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+
+    Opinion(id=12, user_id=2, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=13, user_id=2, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=14, user_id=2, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=15, user_id=2, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=16, user_id=2, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok'),
+    Opinion(id=17, user_id=2, rating=3, date=datetime(2020, 6, 4, hour=12, minute=8, second=34), description='ok')
 ]
 noOpinions: List[Opinion] = []
 
@@ -81,8 +95,8 @@ tipsPl : List[DailyTip] =[
 
 users : List[User] =[
     User(id=0, username="ms@platform", password="1234", name="Megan Three Stalion"),
-    User(id=0, username="mg@platform", password="2345", name="Magda Gesler"),
-    User(id=0, username="hp@platform", password="3456", name="Harry Potter")
+    User(id=1, username="mg@platform", password="2345", name="Magda Gesler"),
+    User(id=2, username="hp@platform", password="3456", name="Harry Potter")
 ]
 
 revenue : List[Revenue]=[
