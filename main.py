@@ -149,6 +149,16 @@ turnover : List[Turnover]=[
     Turnover(id=0,user_id=0,date=datetime(2022, 1, 6,0,0),n=367),
     Turnover(id=0,user_id=0,date=datetime(2022, 1, 7,0,0),n=286),
     Turnover(id=0,user_id=1,date=datetime(2022, 1, 7,0,0),n=286)
+    Turnover(id=0,user_id=0,date=datetime(2021, 12, 1,0,0),n=12453),
+    Turnover(id=1,user_id=1,date=datetime(2022, 1, 1,0,0),n=147),
+    Turnover(id=1,user_id=1,date=datetime(2022, 1, 2,0,0),n=234),
+    Turnover(id=1,user_id=1,date=datetime(2022, 1, 3,0,0),n=178),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 4,0,0),n=90),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 4,0,0),n=000),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 5,0,0),n=123),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 6,0,0),n=15),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 7,0,0),n=326),
+    Turnover(id=0,user_id=1,date=datetime(2022, 1, 7,0,0),n=111)
 ]
 
 
