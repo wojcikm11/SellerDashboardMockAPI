@@ -62,9 +62,11 @@ noOpinions: List[Opinion] = []
 
 orders: Orders = Orders(user_id=0, unpaid=1, unsent=2, refunds=3, pending=4)
 noOrders: Orders = Orders(user_id=1, unpaid=0, unsent=0, refunds=0, pending=0)
+orders2: Orders = Orders(user_id=2, unpaid=43, unsent=22, refunds=31, pending=53)
 ordersMap = {
     0: orders,
-    1: noOrders
+    1: noOrders,
+    2: orders2
 }
 
 
@@ -74,7 +76,13 @@ offers: List[Offer] = [
     Offer(id=2, user_id=0, photoBytes=convertImgToString("phone.jpg"), name="Spaghetti prosto z Włoch", sold=100, turnover=2, views=42),
     Offer(id=3, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="Sushi z tego dobrego miejsca gdzie są zniżki", sold=101, turnover=103, views=13),
     Offer(id=4, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="Chińczyk", sold=6, turnover=12, views=399),
-    Offer(id=5, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="LOLOLOLO", sold=2, turnover=6, views=100)
+    Offer(id=5, user_id=0, photoBytes=convertImgToString("kaczka.jpg"), name="LOLOLOLO", sold=2, turnover=6, views=100),
+    Offer(id=6, user_id=1, photoBytes=convertImgToString("karta.jpg"), name="Karta graficzna MSI GeForce RTX 3090 Gaming X Trio 24GB", sold=24, turnover=59, views=103),
+    Offer(id=7, user_id=1, photoBytes=convertImgToString("ladowarka.jpg"), name="Ładowarka Samsung 24W", sold=32, turnover=21, views=224),
+    Offer(id=8, user_id=1, photoBytes=convertImgToString("phone.jpg"), name="Iphone X używany -50%", sold=100, turnover=2, views=42),
+    Offer(id=9, user_id=1, photoBytes=convertImgToString("laptop.png"), name="Laptop ACER Nitro 5 AN515-57 15.6", sold=101, turnover=103, views=13),
+    Offer(id=10, user_id=1, photoBytes=convertImgToString("ipad.jpg"), name="Ipad 6. generacji", sold=6, turnover=12, views=399),
+    Offer(id=11, user_id=1, photoBytes=convertImgToString("sluchawki.jpg"), name="Słuchawki z kocimi uszami", sold=50, turnover=56, views=1002)
 ]
 
 noOffers: List[Offer] = []
@@ -584,9 +592,6 @@ async def root(id: int):
 async def root(id: int):
     return ordersMap[id]
     
-@app.get("/no_orders/{id}")
-async def root(id: int):
-    return ordersMap[id]
 
 @app.get("/offers/{id}")
 async def root(id: int):
@@ -595,14 +600,6 @@ async def root(id: int):
         if i.user_id == id:
             offers_filtered.append(i)
     return offers_filtered
-
-@app.get("/no_offers/{id}")
-async def root(id: int):
-    no_offers_filtered = list()
-    for i in noOffers:
-        if i.user_id == id:
-            no_offers_filtered.append(i)
-    return no_offers_filtered
     
 @app.get("/user")
 async def root():
